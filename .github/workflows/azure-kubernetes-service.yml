@@ -47,12 +47,7 @@ jobs:
         severity-threshold: CRITICAL
         run-quality-checks: true
     
-    - name: Scan image
-      uses: Azure/container-scan@v0
-      with:
-        image-name: ${{ secrets.ACR_LOGIN_SERVER }}/spring-petclinic:${{ github.run_number }}
-        severity-threshold: CRITICAL
-        run-quality-checks: true
+ 
     # Set Kubernetes Context
     - name: Gets K8s context
       uses: azure/aks-set-context@v1
