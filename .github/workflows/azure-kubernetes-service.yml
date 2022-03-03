@@ -32,6 +32,12 @@
 
 on: [push]
 
+env:
+ AZURE_CONTAINER_REGISTRY: seagwamaksdevacr
+ PROJECT_NAME: bb2app
+ RESOURCE_GROUP: seagwam-aks-dev-rg
+ CLUSTER_NAME: seagwam-dev-aks
+  
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -42,3 +48,10 @@ jobs:
       uses: azure/login@v1
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
+        
+    # Connect to Azure Container Registry (ACR)
+    - uses: azure/docker-login@v1
+      with:
+        login-server: ${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io
+        username: ${{ secrets.REGISTRY_USERNAME }} 
+        password: ${{ secrets.REGISTRY_PASSWORD }}
