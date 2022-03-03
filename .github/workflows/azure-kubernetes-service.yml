@@ -37,7 +37,28 @@ jobs:
    #     docker push ${{ env.REGISTRY_NAME }}.azurecr.io/${{ env.APP_NAME }}:${{ github.sha }}
    #   working-directory: ./<path-to-Dockerfile-directory>
       
-      
+    # Scan the image for vulnerabilities
+   # - name: Scan the image for vulnerabilities
+   #  uses: azure/container-scan@v0
+   #   with:
+   #     image-name: ${{ env.REGISTRY_NAME }}.azurecr.io/${{ env.APP_NAME }}:${{ github.sha }}
+   #     username: ${{ secrets.REGISTRY_USERNAME }} 
+   #     password: ${{ secrets.REGISTRY_PASSWORD }}
+    
+    
+    - name: Scan image
+      uses: Azure/container-scan@v0
+      with:
+        image-name: docker.io/nginx
+        severity-threshold: CRITICAL
+        run-quality-checks: true
+    
+    - name: Scan image
+      uses: Azure/container-scan@v0
+      with:
+        image-name: ${{ secrets.ACR_LOGIN_SERVER }}/spring-petclinic:${{ github.run_number }}
+        severity-threshold: CRITICAL
+        run-quality-checks: true
     # Set Kubernetes Context
     - name: Gets K8s context
       uses: azure/aks-set-context@v1
