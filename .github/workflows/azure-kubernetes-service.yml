@@ -31,7 +31,8 @@ jobs:
         
     
    #  Container build and push to a Azure Container Registry (ACR)
-   # - run: |
+   # - name: Build image and push to ACR
+   #   run: |
    #    docker build . -t ${{ env.REGISTRY_NAME }}.azurecr.io/${{ env.APP_NAME }}:${{ github.sha }}
    #     docker push ${{ env.REGISTRY_NAME }}.azurecr.io/${{ env.APP_NAME }}:${{ github.sha }}
    #   working-directory: ./<path-to-Dockerfile-directory>
@@ -47,11 +48,13 @@ jobs:
       id: login
       
     # Create namespace if doesn't exist
-    - run: |
+    - name: Create namespace in AKS if it doesn't exist
+      run: |
         kubectl create namespace ${{ env.NAMESPACE }} --dry-run=client -o json | kubectl apply -f -  
 
     # Create image pull secret for ACR
-    - uses: azure/k8s-create-secret@v1
+    - name: Create image pull secret
+      uses: azure/k8s-create-secret@v1
       with:
         container-registry-url: ${{ env.REGISTRY_NAME }}.azurecr.io
         container-registry-username: ${{ secrets.REGISTRY_USERNAME }}
