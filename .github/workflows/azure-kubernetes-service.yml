@@ -38,18 +38,12 @@ jobs:
    #   working-directory: ./<path-to-Dockerfile-directory>
       
     # Scan the image for vulnerabilities
-   # - name: Scan the image for vulnerabilities
-   #  uses: azure/container-scan@v0
-   #   with:
-   #     image-name: ${{ env.REGISTRY_NAME }}.azurecr.io/${{ env.APP_NAME }}:${{ github.sha }}
-   #     username: ${{ secrets.REGISTRY_USERNAME }} 
-   #     password: ${{ secrets.REGISTRY_PASSWORD }}
-    
-    
-    - name: Scan image
-      uses: Azure/container-scan@v0
+    - name: Scan the image for vulnerabilities
+      uses: azure/container-scan@v0
       with:
-        image-name: docker.io/nginx
+        image-name: ${{ env.REGISTRY_NAME }}.azurecr.io/${{ env.APP_NAME }}:${{ github.sha }}
+        username: ${{ secrets.REGISTRY_USERNAME }} 
+        password: ${{ secrets.REGISTRY_PASSWORD }}
         severity-threshold: CRITICAL
         run-quality-checks: true
     
