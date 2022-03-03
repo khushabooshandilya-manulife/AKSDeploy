@@ -44,14 +44,24 @@ jobs:
     steps:
     - uses: actions/checkout@master
     
-    - name: Azure Login
+    - name: Login to Azure
       uses: azure/login@v1
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
         
     # Connect to Azure Container Registry (ACR)
-    - uses: azure/docker-login@v1
+    - name: Login to ACR
+      uses: azure/docker-login@v1
       with:
         login-server: ${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io
         username: ${{ secrets.REGISTRY_USERNAME }} 
         password: ${{ secrets.REGISTRY_PASSWORD }}
+       
+    # Set Kubernetes Context
+    - name: Gets K8s context
+      uses: azure/aks-set-context@v1
+      with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+          resource-group: ${{ env.RESOURCE_GROUP }}
+          cluster-name: ${{ env.CLUSTER_NAME }}
+      id: login
