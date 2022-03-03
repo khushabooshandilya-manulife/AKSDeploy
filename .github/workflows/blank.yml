@@ -28,6 +28,6 @@ jobs:
       - name: Scan image
         uses: Azure/container-scan@v0
         with:
-         image-name: docker.io/nginx
+         image-name: docker.io/node:alpine3.15
          severity-threshold: CRITICAL
          run-quality-checks: true
