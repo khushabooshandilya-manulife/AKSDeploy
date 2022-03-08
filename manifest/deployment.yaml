@@ -1,27 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: bb2app-probes
+  name: nginx-test
   labels:
-    app: bb2app-probes
+    app: nginx-test
   namespace: ifunds-ns
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: bb2app-probes
+      app: nginx-test
   template:
     metadata:
       labels:
-        app: bb2app-probes
+        app: nginx-test
     spec:
       containers:
-        - name: bb2app-probes
-          image: seagwamaksdevacr.azurecr.io/bb2app:v1
-          env:
-          - name: PORT
-            value: "8080"
-          - name: PCF_ENV
-            value: "dev"
+        - name: nginx-test
           ports:
-            - containerPort: 8080
+            - containerPort: 80
