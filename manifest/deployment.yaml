@@ -4,7 +4,7 @@ metadata:
   name: bb2app-probes
   labels:
     app: bb2app-probes
-  namespace: default
+  namespace: ifunds-ns
 spec:
   replicas: 1
   selector:
