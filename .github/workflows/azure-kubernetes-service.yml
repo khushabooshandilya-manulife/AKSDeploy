@@ -71,9 +71,8 @@ jobs:
       with:
         manifests: |
           ${{ github.workspace }}/manifest/deployment.yaml
-          ${{ github.workspace }}/manifest/service.yaml
         images: |
-          ${{ env.REGISTRY_NAME }}.azurecr.io/${{ env.APP_NAME }}:${{ github.sha }}
+          nginx
         imagepullsecrets: |
           ${{ env.SECRET }}
         namespace: ${{ env.NAMESPACE }}
