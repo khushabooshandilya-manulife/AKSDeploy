@@ -38,16 +38,7 @@ jobs:
    #     docker push ${{ env.REGISTRY_NAME }}.azurecr.io/${{ env.APP_NAME }}:${{ github.sha }}
    #   working-directory: ./<path-to-Dockerfile-directory>
       
-    # Scan the image for vulnerabilities
-    - name: Scan the image for vulnerabilities
-      uses: azure/container-scan@v0
-      with:
-        image-name: ${{ env.REGISTRY_NAME }}.azurecr.io/${{ env.APP_NAME }}:${{ github.sha }}
-        username: ${{ secrets.REGISTRY_USERNAME }} 
-        password: ${{ secrets.REGISTRY_PASSWORD }}
-        severity-threshold: CRITICAL
-        run-quality-checks: true
-    
+  
  
     # Set Kubernetes Context
     - name: Gets K8s context
