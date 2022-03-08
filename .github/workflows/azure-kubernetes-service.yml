@@ -31,12 +31,13 @@ jobs:
         password: ${{ secrets.REGISTRY_PASSWORD }}
         
     
-   #  Container build and push to a Azure Container Registry (ACR)
-   # - name: Build image and push to ACR
-   #   run: |
-   #    docker build . -t ${{ env.REGISTRY_NAME }}.azurecr.io/${{ env.APP_NAME }}:${{ github.sha }}
-   #     docker push ${{ env.REGISTRY_NAME }}.azurecr.io/${{ env.APP_NAME }}:${{ github.sha }}
-   #   working-directory: ./<path-to-Dockerfile-directory>
+     # Container build and push to a Azure Container Registry (ACR)
+    - name: Build image and push to ACR
+      run: |
+       docker pull nginx ${{ env.REGISTRY_NAME }}.azurecr.io/${{ env.APP_NAME }}:${{ github.sha }}
+       # docker build . -t ${{ env.REGISTRY_NAME }}.azurecr.io/${{ env.APP_NAME }}:${{ github.sha }}
+       docker push ${{ env.REGISTRY_NAME }}.azurecr.io/${{ env.APP_NAME }}:${{ github.sha }}
+      # working-directory: ./<path-to-Dockerfile-directory>
       
   
  
@@ -72,7 +73,7 @@ jobs:
         manifests: |
           ${{ github.workspace }}/manifest/deployment.yaml
         images: |
-          nginx
+          ${{ env.REGISTRY_NAME }}.azurecr.io/${{ env.APP_NAME }}:${{ github.sha }}
         imagepullsecrets: |
           ${{ env.SECRET }}
         namespace: ${{ env.NAMESPACE }}
