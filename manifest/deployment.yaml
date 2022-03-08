@@ -17,5 +17,6 @@ spec:
     spec:
       containers:
         - name: nginx-test
+          image: seagwamaksdevacr.azurecr.io/nginx
           ports:
             - containerPort: 80
