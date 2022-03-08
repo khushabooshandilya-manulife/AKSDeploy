@@ -4,14 +4,17 @@ name: build project
 
 # Controls when the workflow will run
 # Only trigger, when the build workflow succeeded
-on:
-  workflow_run:
-    workflows: ["test project"]
-    types:
-      - completed
+
+on: [schedule]
+
+#on:
+ # workflow_run:
+  #  workflows: ["test project"]
+   # types:
+    #  - completed
 
   # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
+  #workflow_dispatch:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
