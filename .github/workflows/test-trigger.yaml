@@ -18,10 +18,3 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    steps:
-    # Azure Login 
-    - uses: actions/checkout@main
-    - name: Azure Login
-      uses: azure/login@v1
-      with:
-        creds: ${{ secrets.POC_AZURE_CREDENTIALS }}
