@@ -14,11 +14,12 @@ jobs:
     
     steps:
     
-      - run: echo "Value ${{ secrets.DEV_SECRET }}."
+      - run: echo "Value ${{ env.TEST }}."
   
   Explore-GitHub-Actions-UAT:
   
     runs-on: ubuntu-latest
+    needs: Explore-GitHub-Actions-DEV
     environment: UAT
     
     steps:
