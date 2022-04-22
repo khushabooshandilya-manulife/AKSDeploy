@@ -14,7 +14,7 @@ jobs:
     
     steps:
     
-      - run: echo "Value ${{ env.TEST }}."
+      - run: echo "Value ${{ secrets.SECRET }}."
   
   Explore-GitHub-Actions-UAT:
   
@@ -24,6 +24,6 @@ jobs:
     
     steps:
     
-      - run: echo "Value ${{ secrets.UAT_SECRET }}."
+      - run: echo "Value ${{ secrets.SECRET }}."
       
   
